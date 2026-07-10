@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="editor-container">
+    <div class="instructions">
+        <h2>📖 NQL Quick Reference</h2>
+        <table>
+            <tr><th>Command</th><th>What it does</th></tr>
+            <tr><td><code>INIT N</code></td><td>Create N qubits (max 5)</td></tr>
+            <tr><td><code>H N</code></td><td>Hadamard gate on qubit N</td></tr>
+            <tr><td><code>X N</code></td><td>NOT gate (flip qubit N)</td></tr>
+            <tr><td><code>Y N</code></td><td>Pauli-Y gate on qubit N</td></tr>
+            <tr><td><code>Z N</code></td><td>Pauli-Z gate on qubit N</td></tr>
+            <tr><td><code>CNOT N</code></td><td>Entangle qubit N-1 → N</td></tr>
+        </table>
+
+        <h3>Example: Bell State (Quantum Entanglement)</h3>
+        <pre>INIT 2
+H 0
+CNOT 1</pre>
+    </div>
+
+    <div class="editor">
+        <h2>✏️ Write Your NQL Script</h2>
+        <form action="/compile" method="POST">
+            <textarea
+                name="nql_script"
+                id="nql_editor"
+                placeholder="INIT 2&#10;H 0&#10;CNOT 1"
+                rows="12"
+                spellcheck="false"
+            ></textarea>
+            <button type="submit" class="compile-btn">⚡ Compile & Analyze</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
