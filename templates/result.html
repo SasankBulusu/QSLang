@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="result-container">
+
+    <!-- Back button -->
+    <a href="/" class="back-btn">← Edit Script</a>
+
+    <!-- Original script display -->
+    <div class="card">
+        <h2>Your NQL Script</h2>
+        <pre class="code-block">{{ script }}</pre>
+    </div>
+
+    <!-- Error or Success -->
+    {% if error %}
+        <div class="card error-card">
+            <h2>Compilation Error</h2>
+            <p class="error-message">{{ error }}</p>
+        </div>
+    {% else %}
+        <div class="card success-card">
+            <h2>Compilation Successful</h2>
+            <p>Compiled <strong>{{ payload|length }}</strong> gate(s) on <strong>{{ num_qubits }}</strong> qubit(s).</p>
+        </div>
+
+        <div class="card">
+            <h2>Quantum Circuit Diagram</h2>
+            <pre class="circuit-diagram">{{ circuit_diagram }}</pre>
+        </div>
+    {% endif %}
+
+    <!-- AI Tutor Output -->
+    <div class="card ai-card">
+        <h2>AI Tutor Explanation</h2>
+        <div class="ai-output">
+            {{ ai_explanation | replace('\n', '<br>') | safe }}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
